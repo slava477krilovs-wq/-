@@ -13,7 +13,7 @@
   const els = {
     sidebar: $('#sidebar'), historyList: $('#historyList'), favoriteCount: $('#favoriteCount'),
     welcome: $('#welcome'), conversation: $('#conversation'), messages: $('#messages'),
-    prompt: $('#promptInput'), send: $('#sendButton'), providerGrid: $('#providerGrid'),
+    prompt: $('#promptInput'), send: $('#sendButton'), attachmentTray: $('#attachmentTray'), providerGrid: $('#providerGrid'),
     modelPicker: $('#modelPicker'), modelMenu: $('#modelMenu'), selectedLogo: $('#selectedLogo'),
     selectedProviderName: $('#selectedProviderName'), title: $('#conversationTitle'),
     breadcrumbTitle: $('#breadcrumbTitle'), toast: $('#toast'), favorite: $('#favoriteChat'),
