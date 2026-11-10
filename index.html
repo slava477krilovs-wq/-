@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0d13" />
+  <meta name="description" content="Единое пространство для работы с любимыми AI-чатами." />
+  <title>OmniChat — единое пространство AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row">
+        <div class="brand-mark"><span></span><span></span><span></span></div>
+        <div class="brand-name">omni<span>chat</span><small>BETA WORKSPACE</small></div>
+        <button class="icon-button sidebar-close" id="closeSidebar" aria-label="Закрыть меню">×</button>
+      </div>
+
+      <button class="new-chat-button" id="newChat"><span class="plus">＋</span> Новый диалог <kbd>⌘ K</kbd></button>
+
+      <div class="side-section">
+        <div class="section-heading">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+        <button class="nav-item active" id="navChat"><span class="nav-icon">◈</span> Все диалоги</button>
+        <button class="nav-item" id="navFavorites"><span class="nav-icon">☆</span> Избранное <span class="nav-count" id="favoriteCount">0</span></button>
+      </div>
+
+      <div class="history-section">
+        <div class="section-heading history-heading">ИСТОРИЯ <button id="clearHistory" title="Удалить всю историю">···</button></div>
+        <div class="history-list" id="historyList">
+          <div class="history-empty">Здесь появятся твои диалоги</div>
+        </div>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="privacy-card">
+          <div class="privacy-icon">⌁</div>
+          <div><strong>Твои данные — локально</strong><p>История хранится только в этом браузере.</p></div>
+        </div>
+        <div class="profile-row">
+          <div class="avatar avatar-user">S</div>
+          <div class="profile-copy"><strong>Мой профиль</strong><span>Локальный режим</span></div>
+          <button class="icon-button" id="exportAll" title="Экспортировать историю">⇩</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="openSidebar" aria-label="Открыть меню">☰</button>
+        <div class="breadcrumb"><span>Рабочее пространство</span><b>/</b><strong id="breadcrumbTitle">Новый диалог</strong></div>
+        <div class="top-actions">
+          <span class="local-status"><i></i> Локальный режим</span>
+          <button class="icon-button" id="helpButton" title="Как это работает">?</button>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <div class="welcome" id="welcome">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> ОДНО ПРОСТРАНСТВО · РАЗНЫЕ AI</div>
+          <h1>Все идеи.<br><span>Все нейросети.</span></h1>
+          <p class="welcome-subtitle">Пиши запрос здесь, продолжай его в любимом AI-чате и собирай ответы в одном удобном месте.</p>
+
+          <div class="provider-grid" id="providerGrid">
+            <button class="provider-card selected" data-provider="chatgpt">
+              <span class="provider-logo logo-chatgpt">✳</span><span class="provider-info"><strong>ChatGPT</strong><small>OpenAI</small></span><span class="provider-arrow">↗</span>
+            </button>
+            <button class="provider-card" data-provider="claude">
+              <span class="provider-logo logo-claude">✳</span><span class="provider-info"><strong>Claude</strong><small>Anthropic</small></span><span class="provider-arrow">↗</span>
+            </button>
+            <button class="provider-card" data-provider="gemini">
+              <span class="provider-logo logo-gemini">✦</span><span class="provider-info"><strong>Gemini</strong><small>Google</small></span><span class="provider-arrow">↗</span>
+            </button>
+            <button class="provider-card" data-provider="deepseek">
+              <span class="provider-logo logo-deepseek">◉</span><span class="provider-info"><strong>DeepSeek</strong><small>DeepSeek</small></span><span class="provider-arrow">↗</span>
+            </button>
+            <button class="provider-card" data-provider="perplexity">
+              <span class="provider-logo logo-perplexity">⌕</span><span class="provider-info"><strong>Perplexity</strong><small>Perplexity AI</small></span><span class="provider-arrow">↗</span>
+            </button>
+          </div>
+          <div class="welcome-note"><span>✦</span> Выбери сервис — запрос будет скопирован, а официальный чат откроется в новой вкладке.</div>
+        </div>
+
+        <div class="conversation" id="conversation" hidden>
+          <div class="conversation-heading"><div><span class="eyebrow">ТВОЙ ДИАЛОГ</span><h2 id="conversationTitle">Новый диалог</h2></div><div class="conversation-tools"><button class="subtle-button" id="favoriteChat">☆ <span>В избранное</span></button><button class="subtle-button" id="exportChat">⇩ <span>Экспорт</span></button></div></div>
+          <div class="messages" id="messages"></div>
+        </div>
+      </section>
+
+      <footer class="composer-wrap">
+        <div class="composer" id="composer">
+          <textarea id="promptInput" rows="1" placeholder="Напиши, что хочешь узнать или создать..."></textarea>
+          <div class="composer-bottom">
+            <div class="composer-left">
+              <div class="model-picker-wrap">
+                <button class="model-picker" id="modelPicker"><span class="mini-provider-logo" id="selectedLogo">✳</span><span id="selectedProviderName">ChatGPT</span><span class="chevron">⌄</span></button>
+                <div class="model-menu" id="modelMenu" hidden>
+                  <button data-provider="chatgpt">✳ <span>ChatGPT</span><small>OpenAI</small></button>
+                  <button data-provider="claude">✳ <span>Claude</span><small>Anthropic</small></button>
+                  <button data-provider="gemini">✦ <span>Gemini</span><small>Google</small></button>
+                  <button data-provider="deepseek">◉ <span>DeepSeek</span><small>DeepSeek</small></button>
+                  <button data-provider="perplexity">⌕ <span>Perplexity</span><small>Perplexity AI</small></button>
+                </div>
+              </div>
+              <span class="composer-hint">Без API-ключей</span>
+            </div>
+            <button class="send-button" id="sendButton"><span>Открыть чат и скопировать</span><b>↗</b></button>
+          </div>
+        </div>
+        <div class="composer-footnote"><span>ⓘ</span> OmniChat не отправляет запросы автоматически. В открывшемся сервисе вставь текст и нажми «Отправить».</div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="help-dialog" id="helpDialog">
+    <div class="dialog-top"><div class="dialog-symbol">✦</div><button class="icon-button" id="closeHelp">×</button></div>
+    <h2>Как работает OmniChat</h2>
+    <p>Сайт — это единое рабочее место, а ответы генерируются на официальных сайтах AI-сервисов.</p>
+    <div class="help-steps">
+      <div><b>01</b><span><strong>Напиши запрос</strong><small>Текст появится в истории OmniChat.</small></span></div>
+      <div><b>02</b><span><strong>Открой AI-сервис</strong><small>OmniChat скопирует запрос и откроет официальный чат.</small></span></div>
+      <div><b>03</b><span><strong>Вставь и отправь</strong><small>Вставь текст в чате сервиса. Ответ можно добавить сюда вручную.</small></span></div>
+    </div>
+    <div class="dialog-warning">Автоматическое управление сторонними чатами может нарушать их правила и блокироваться защитой. Поэтому вход, отправка и получение ответа остаются под твоим контролем.</div>
+    <button class="dialog-action" id="gotIt">Понятно</button>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
