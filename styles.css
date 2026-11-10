@@ -2,3 +2,27 @@
 @media(max-width:800px){.sidebar{width:235px}.workspace,.composer-wrap{width:calc(100% - 36px)}.topbar{padding:0 18px}.welcome h1{font-size:55px}}
 @media(max-width:620px){.sidebar{position:fixed;z-index:15;top:0;bottom:0;left:0;transform:translateX(-105%);transition:transform .22s;box-shadow:20px 0 60px #0008}.sidebar.open{transform:translateX(0)}.sidebar-close,.mobile-menu{display:grid}.topbar{height:55px;padding:0 12px;gap:10px}.breadcrumb{font-size:10px;gap:7px;flex:1;overflow:hidden}.breadcrumb span{display:none}.top-actions{gap:7px}.local-status{font-size:9px}.workspace,.composer-wrap{width:calc(100% - 26px)}.welcome{padding:27px 0}.welcome h1{font-size:49px;letter-spacing:-2.8px;margin-top:17px}.welcome-subtitle{font-size:12px}.provider-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.provider-card{height:61px;padding:0 9px;gap:8px}.provider-logo{width:27px;height:27px}.provider-info strong{font-size:10px}.provider-info small{font-size:8px}.provider-arrow{padding-top:9px}.welcome-note{align-items:flex-start;line-height:1.5}.composer-wrap{padding-bottom:12px}.composer{padding:10px}.composer textarea{min-height:55px;font-size:12px}.composer-bottom{align-items:flex-end}.composer-left{gap:6px;flex-wrap:wrap}.composer-hint{display:none}.send-button{height:34px;font-size:9px;padding:0 8px;gap:7px}.composer-footnote{font-size:8px;line-height:1.4;text-align:center}.conversation{padding-top:23px}.conversation-heading h2{font-size:18px}.subtle-button{padding:7px}.subtle-button span{display:none}.message{max-width:96%}.top-actions .icon-button{width:26px;height:26px}}
 @media(max-width:380px){.welcome h1{font-size:42px}.provider-card{gap:6px}.provider-info strong{font-size:9px}.provider-logo{width:24px;height:24px}.send-button span{max-width:110px}}
+
+/* File and image attachments */
+.composer-tools-row{display:flex;align-items:center;gap:10px;padding:0 3px 9px}
+.attach-button{border:1px solid #39334e;border-radius:7px;background:#211d31;color:#c9bcf3;padding:6px 9px;font-size:10px;font-weight:600}
+.attach-button:hover{border-color:#806ac5;background:#29223d}
+.composer-tools-row>span{font-size:9px;color:#687287}
+.attachment-tray{display:flex;flex-wrap:wrap;gap:7px;padding:0 2px 10px}
+.attachment-chip{display:flex;align-items:center;gap:8px;min-width:0;max-width:240px;padding:6px 8px;border:1px solid #343044;background:#1b1d2a;border-radius:8px}
+.attachment-preview-image{width:36px;height:36px;object-fit:cover;border-radius:5px}
+.attachment-file-icon{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:6px;background:#29243a;color:#c7b7ff;font-size:18px}
+.attachment-chip-copy,.message-attachment-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.attachment-chip-copy strong,.message-attachment-copy strong{font-size:9px;color:#e3e6ef;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:145px}
+.attachment-chip-copy small,.message-attachment-copy small{font-size:8px;color:#7e8799}
+.attachment-chip>button{border:0;background:transparent;color:#929bad;font-size:17px;padding:0 2px}
+.composer.drag-over{border-color:#9e87ec;background:#1b1930;box-shadow:0 0 0 3px #9278e533}
+.message-attachments{display:flex;flex-direction:column;gap:7px;margin-top:8px;max-width:min(100%,440px)}
+.message-attachment{display:flex;align-items:center;gap:9px;padding:7px 8px;border:1px solid #30364a;background:#141a25;border-radius:8px;min-width:0}
+.message-attachment-image{width:54px;height:44px;object-fit:cover;border-radius:5px;background:#0c1018;flex:none}
+.message-attachment .attachment-file-icon{width:38px;height:38px}
+.message-attachment-copy{flex:1}
+.message-attachment-copy strong{max-width:230px}
+.message-attachment>button{border:1px solid #41405a;background:#27233b;color:#cbbdff;border-radius:6px;padding:6px 8px;font-size:9px;flex:none}
+.message-attachment>button:hover{background:#393052}
+@media(max-width:620px){.composer-tools-row{padding-bottom:7px}.composer-tools-row>span{font-size:8px}.attachment-chip{max-width:100%}.message-attachment-copy strong{max-width:130px}.message-attachment>button{padding:6px}}
