@@ -92,6 +92,9 @@
 
       <footer class="composer-wrap">
         <div class="composer" id="composer">
+          <input id="fileInput" type="file" multiple accept="image/*,.pdf,.txt,.md,.csv,.json,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip" hidden />
+          <div class="composer-tools-row"><button type="button" class="attach-button" id="attachButton">＋ Прикрепить файлы</button><span>Изображения и документы · до 20 МБ каждый</span></div>
+          <div class="attachment-tray" id="attachmentTray" hidden aria-live="polite"></div>
           <textarea id="promptInput" rows="1" placeholder="Напиши, что хочешь узнать или создать..."></textarea>
           <div class="composer-bottom">
             <div class="composer-left">
@@ -107,10 +110,10 @@
               </div>
               <span class="composer-hint">Без API-ключей</span>
             </div>
-            <button class="send-button" id="sendButton"><span>Открыть чат и скопировать</span><b>↗</b></button>
+            <button class="send-button" id="sendButton"><span>Открыть чат в фоне</span><b>↗</b></button>
           </div>
         </div>
-        <div class="composer-footnote"><span>ⓘ</span> OmniChat не отправляет запросы автоматически. В открывшемся сервисе вставь текст и нажми «Отправить».</div>
+        <div class="composer-footnote"><span>ⓘ</span> Вставь запрос в открытой вкладке AI. Изображение можно вставить через Ctrl+V; остальные файлы скачай из сообщения и прикрепи вручную.</div>
       </footer>
     </main>
   </div>
