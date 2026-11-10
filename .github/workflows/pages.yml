@@ -1,4 +1,4 @@
-name: Deploy OmniChat to GitHub Pages
+name: Deploy RemoteHub to GitHub Pages
 
 on:
   push:

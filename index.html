@@ -1,138 +1,123 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b0d13" />
-  <meta name="description" content="Единое пространство для работы с любимыми AI-чатами." />
-  <title>OmniChat — единое пространство AI</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="RemoteHub — панель для безопасной организации удалённого доступа к компьютерам.">
+  <title>RemoteHub — удалённый доступ</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar" id="sidebar">
-      <div class="brand-row">
-        <div class="brand-mark"><span></span><span></span><span></span></div>
-        <div class="brand-name">omni<span>chat</span><small>BETA WORKSPACE</small></div>
-        <button class="icon-button sidebar-close" id="closeSidebar" aria-label="Закрыть меню">×</button>
-      </div>
-
-      <button class="new-chat-button" id="newChat"><span class="plus">＋</span> Новый диалог <kbd>⌘ K</kbd></button>
-
-      <div class="side-section">
-        <div class="section-heading">РАБОЧЕЕ ПРОСТРАНСТВО</div>
-        <button class="nav-item active" id="navChat"><span class="nav-icon">◈</span> Все диалоги</button>
-        <button class="nav-item" id="navFavorites"><span class="nav-icon">☆</span> Избранное <span class="nav-count" id="favoriteCount">0</span></button>
-      </div>
-
-      <div class="history-section">
-        <div class="section-heading history-heading">ИСТОРИЯ <button id="clearHistory" title="Удалить всю историю">···</button></div>
-        <div class="history-list" id="historyList">
-          <div class="history-empty">Здесь появятся твои диалоги</div>
-        </div>
-      </div>
-
-      <div class="sidebar-bottom">
-        <div class="privacy-card">
-          <div class="privacy-icon">⌁</div>
-          <div><strong>Твои данные — локально</strong><p>История хранится только в этом браузере.</p></div>
-        </div>
-        <div class="profile-row">
-          <div class="avatar avatar-user">S</div>
-          <div class="profile-copy"><strong>Мой профиль</strong><span>Локальный режим</span></div>
-          <button class="icon-button" id="exportAll" title="Экспортировать историю">⇩</button>
-        </div>
-      </div>
-    </aside>
-
-    <main class="main-area">
-      <header class="topbar">
-        <button class="icon-button mobile-menu" id="openSidebar" aria-label="Открыть меню">☰</button>
-        <div class="breadcrumb"><span>Рабочее пространство</span><b>/</b><strong id="breadcrumbTitle">Новый диалог</strong></div>
-        <div class="top-actions">
-          <span class="local-status"><i></i> Локальный режим</span>
-          <button class="icon-button" id="helpButton" title="Как это работает">?</button>
-        </div>
-      </header>
-
-      <section class="workspace">
-        <div class="welcome" id="welcome">
-          <div class="eyebrow"><span class="eyebrow-dot"></span> ОДНО ПРОСТРАНСТВО · РАЗНЫЕ AI</div>
-          <h1>Все идеи.<br><span>Все нейросети.</span></h1>
-          <p class="welcome-subtitle">Пиши запрос здесь, продолжай его в любимом AI-чате и собирай ответы в одном удобном месте.</p>
-
-          <div class="provider-grid" id="providerGrid">
-            <button class="provider-card selected" data-provider="chatgpt">
-              <span class="provider-logo logo-chatgpt">✳</span><span class="provider-info"><strong>ChatGPT</strong><small>OpenAI</small></span><span class="provider-arrow">↗</span>
-            </button>
-            <button class="provider-card" data-provider="claude">
-              <span class="provider-logo logo-claude">✳</span><span class="provider-info"><strong>Claude</strong><small>Anthropic</small></span><span class="provider-arrow">↗</span>
-            </button>
-            <button class="provider-card" data-provider="gemini">
-              <span class="provider-logo logo-gemini">✦</span><span class="provider-info"><strong>Gemini</strong><small>Google</small></span><span class="provider-arrow">↗</span>
-            </button>
-            <button class="provider-card" data-provider="deepseek">
-              <span class="provider-logo logo-deepseek">◉</span><span class="provider-info"><strong>DeepSeek</strong><small>DeepSeek</small></span><span class="provider-arrow">↗</span>
-            </button>
-            <button class="provider-card" data-provider="perplexity">
-              <span class="provider-logo logo-perplexity">⌕</span><span class="provider-info"><strong>Perplexity</strong><small>Perplexity AI</small></span><span class="provider-arrow">↗</span>
-            </button>
-          </div>
-          <div class="welcome-note"><span>✦</span> Выбери сервис — запрос будет скопирован, а официальный чат откроется в новой вкладке.</div>
-        </div>
-
-        <div class="conversation" id="conversation" hidden>
-          <div class="conversation-heading"><div><span class="eyebrow">ТВОЙ ДИАЛОГ</span><h2 id="conversationTitle">Новый диалог</h2></div><div class="conversation-tools"><button class="subtle-button" id="favoriteChat">☆ <span>В избранное</span></button><button class="subtle-button" id="exportChat">⇩ <span>Экспорт</span></button></div></div>
-          <div class="messages" id="messages"></div>
-        </div>
-      </section>
-
-      <footer class="composer-wrap">
-        <div class="composer" id="composer">
-          <input id="fileInput" type="file" multiple accept="image/*,.pdf,.txt,.md,.csv,.json,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip" hidden />
-          <div class="composer-tools-row"><button type="button" class="attach-button" id="attachButton">＋ Прикрепить файлы</button><span>Изображения и документы · до 20 МБ каждый</span></div>
-          <div class="attachment-tray" id="attachmentTray" hidden aria-live="polite"></div>
-          <textarea id="promptInput" rows="1" placeholder="Напиши, что хочешь узнать или создать..."></textarea>
-          <div class="composer-bottom">
-            <div class="composer-left">
-              <div class="model-picker-wrap">
-                <button class="model-picker" id="modelPicker"><span class="mini-provider-logo" id="selectedLogo">✳</span><span id="selectedProviderName">ChatGPT</span><span class="chevron">⌄</span></button>
-                <div class="model-menu" id="modelMenu" hidden>
-                  <button data-provider="chatgpt">✳ <span>ChatGPT</span><small>OpenAI</small></button>
-                  <button data-provider="claude">✳ <span>Claude</span><small>Anthropic</small></button>
-                  <button data-provider="gemini">✦ <span>Gemini</span><small>Google</small></button>
-                  <button data-provider="deepseek">◉ <span>DeepSeek</span><small>DeepSeek</small></button>
-                  <button data-provider="perplexity">⌕ <span>Perplexity</span><small>Perplexity AI</small></button>
-                </div>
-              </div>
-              <span class="composer-hint">Без API-ключей</span>
-            </div>
-            <button class="send-button" id="sendButton"><span>Открыть чат в фоне</span><b>↗</b></button>
-          </div>
-        </div>
-        <div class="composer-footnote"><span>ⓘ</span> Вставь запрос в открытой вкладке AI. Изображение можно вставить через Ctrl+V; остальные файлы скачай из сообщения и прикрепи вручную.</div>
-      </footer>
-    </main>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <dialog class="help-dialog" id="helpDialog">
-    <div class="dialog-top"><div class="dialog-symbol">✦</div><button class="icon-button" id="closeHelp">×</button></div>
-    <h2>Как работает OmniChat</h2>
-    <p>Сайт — это единое рабочее место, а ответы генерируются на официальных сайтах AI-сервисов.</p>
-    <div class="help-steps">
-      <div><b>01</b><span><strong>Напиши запрос</strong><small>Текст появится в истории OmniChat.</small></span></div>
-      <div><b>02</b><span><strong>Открой AI-сервис</strong><small>OmniChat скопирует запрос и откроет официальный чат.</small></span></div>
-      <div><b>03</b><span><strong>Вставь и отправь</strong><small>Вставь текст в чате сервиса. Ответ можно добавить сюда вручную.</small></span></div>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#overview"><span class="brand-mark">▣</span><span>Remote<span class="brand-accent">Hub</span><small>PERSONAL WORKSPACE</small></span></a>
+    <div class="nav-label">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+    <nav class="navigation" aria-label="Основная навигация">
+      <button class="nav-item active" data-page="overview"><span>⌂</span>Обзор</button>
+      <button class="nav-item" data-page="devices"><span>▣</span>Компьютеры</button>
+      <button class="nav-item" data-page="files"><span>⇧</span>Передача файлов</button>
+      <button class="nav-item" data-page="activity"><span>◷</span>История</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="secure-note"><i></i><div><strong>Локальная панель</strong><small>Без хранения паролей и ключей</small></div></div>
+      <button class="nav-item" data-page="settings"><span>⚙</span>Настройки</button>
+      <div class="profile"><div class="avatar">RH</div><div><strong>Личное пространство</strong><small>Бесплатная конфигурация</small></div></div>
     </div>
-    <div class="dialog-warning">Автоматическое управление сторонними чатами может нарушать их правила и блокироваться защитой. Поэтому вход, отправка и получение ответа остаются под твоим контролем.</div>
-    <button class="dialog-action" id="gotIt">Понятно</button>
-  </dialog>
+  </aside>
 
-  <script src="app.js"></script>
+  <main class="main-content">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu" aria-label="Открыть меню">☰</button>
+      <div class="breadcrumbs">RemoteHub <b>/</b> <strong id="crumbTitle">Обзор</strong></div>
+      <div class="topbar-right"><span class="secure-pill"><i></i>Защищённый интерфейс</span><button class="icon-button" id="themeToggle" aria-label="Переключить тему">◐</button></div>
+    </header>
+
+    <section class="page active" id="page-overview">
+      <div class="welcome-row">
+        <div><div class="eyebrow">ЛИЧНЫЙ УДАЛЁННЫЙ ДОСТУП</div><h1>Работай <span>откуда удобно.</span></h1><p class="lead">Единая панель для подключения к своим компьютерам и безопасного обмена файлами.</p></div>
+        <div class="date-chip"><i></i>Система готова к настройке</div>
+      </div>
+      <div class="notice-banner"><div class="notice-icon">i</div><div><strong>Режим без установки агента RemoteHub</strong><p>Для удалённой помощи используйте Microsoft Quick Assist. Человек за рабочим ПК должен ввести одноразовый код и подтвердить демонстрацию экрана и управление. Сам сайт не получает доступ к рабочему столу.</p></div><a href="https://support.microsoft.com/ru-ru/windows/apps/solve-pc-problems-remotely-using-quick-assist" target="_blank" rel="noopener noreferrer">Инструкция Microsoft ↗</a></div>
+      <div class="section-heading"><div><h2>Ваши компьютеры</h2><p>Устройства, которые вы планируете использовать</p></div><button class="secondary-button" id="addDeviceBtn">＋ Добавить компьютер</button></div>
+      <div class="device-grid">
+        <article class="device-card">
+          <div class="device-card-top"><div class="device-type-icon">▣</div><span class="status neutral"><i></i>Не подключён</span></div>
+          <div class="device-title-row"><div><h3 id="workPcName">Рабочий ПК</h3><p>Windows 10 / 11 · Удалённое устройство</p></div></div>
+          <div class="device-divider"></div>
+          <div class="device-meta"><span>Доступный способ</span><strong>Microsoft Quick Assist</strong></div>
+          <button class="primary-button full" id="startSessionBtn">Открыть инструкцию подключения <span>↗</span></button>
+        </article>
+        <button class="add-device-card" id="addDeviceCard"><span>＋</span><strong>Добавить устройство</strong><small>Добавьте ещё один свой компьютер</small></button>
+      </div>
+      <div class="section-heading spaced"><div><h2>Быстрые действия</h2><p>Часто используемые разделы</p></div></div>
+      <div class="quick-grid">
+        <button class="quick-card" data-go="devices"><span class="quick-icon purple">▣</span><span><strong>Подключение к ПК</strong><small>Инструкция Quick Assist</small></span><b>↗</b></button>
+        <button class="quick-card" data-go="files"><span class="quick-icon blue">⇧</span><span><strong>Передать файл</strong><small>Безопасный обмен через облако</small></span><b>→</b></button>
+        <button class="quick-card" data-go="settings"><span class="quick-icon green">✓</span><span><strong>Проверка готовности</strong><small>Контроль настроек</small></span><b>→</b></button>
+      </div>
+      <footer class="footer-note">RemoteHub · Статическая версия · Данные устройств хранятся только в этом браузере</footer>
+    </section>
+
+    <section class="page" id="page-devices">
+      <div class="page-heading"><div class="eyebrow">УСТРОЙСТВА</div><h1>Компьютеры</h1><p class="lead">Управляйте списком устройств и открывайте инструкции безопасного подключения.</p></div>
+      <div class="content-card">
+        <div class="content-card-heading"><div class="device-type-icon">▣</div><div><h3 id="devicePageName">Рабочий ПК</h3><p>Windows 10 / 11 · Основное устройство</p></div><span class="status neutral"><i></i>Не подключён</span></div>
+        <div class="info-grid"><div><small>Текущий метод</small><strong>Microsoft Quick Assist</strong></div><div><small>Постоянный доступ</small><strong>Не поддерживается</strong></div><div><small>Агент RemoteHub</small><strong>Не установлен</strong></div></div>
+        <div class="warning-box"><strong>Почему нельзя подключиться автоматически?</strong><p>Обычная веб-страница не имеет разрешения захватывать экран Windows, управлять мышью и клавиатурой или просматривать диски. Для этого нужен системный компонент на удалённом ПК. В текущем режиме используется Quick Assist с подтверждением человеком за рабочим компьютером.</p></div>
+        <button class="primary-button" id="deviceHelpBtn">Инструкция подключения <span>↗</span></button>
+      </div>
+      <div class="content-card steps-card"><div class="content-card-heading"><div><h3>Как подключиться из дома</h3><p>Оба компьютера должны быть включены и подключены к интернету.</p></div></div>
+        <ol class="steps-list">
+          <li><span>1</span><div><strong>На домашнем ПК</strong><p>Откройте приложение «Быстрая помощь» (Quick Assist) и выберите помощь другому пользователю. При необходимости войдите в учётную запись Microsoft.</p></div></li>
+          <li><span>2</span><div><strong>Получите одноразовый код</strong><p>Скопируйте код безопасности из приложения и передайте его человеку, который находится за рабочим компьютером. Не публикуйте код открыто.</p></div></li>
+          <li><span>3</span><div><strong>На рабочем ПК</strong><p>Откройте Quick Assist, введите код и подтвердите демонстрацию экрана.</p></div></li>
+          <li><span>4</span><div><strong>Разрешите управление</strong><p>На домашнем ПК запросите управление. На рабочем ПК подтвердите запрос, только если вы сами инициировали сеанс.</p></div></li>
+        </ol>
+        <a class="text-link" href="https://support.microsoft.com/ru-ru/windows/apps/solve-pc-problems-remotely-using-quick-assist" target="_blank" rel="noopener noreferrer">Официальная инструкция Microsoft ↗</a>
+      </div>
+    </section>
+
+    <section class="page" id="page-files">
+      <div class="page-heading"><div class="eyebrow">ОБМЕН ДАННЫМИ</div><h1>Передача файлов</h1><p class="lead">Переносите документы между домом и работой с помощью разрешённых способов хранения.</p></div>
+      <div class="notice-banner file-notice"><div class="notice-icon">i</div><div><strong>Прямой файловый менеджер пока недоступен</strong><p>Без агента или сетевого хранилища сайт не может просматривать папки рабочего ПК и передавать файлы напрямую.</p></div></div>
+      <div class="file-options">
+        <article class="file-option"><div class="file-option-icon blue">☁</div><h3>OneDrive</h3><p>Загрузите файл с одного компьютера и скачайте его на другом. Для рабочих документов соблюдайте правила организации.</p><a class="primary-button" href="https://onedrive.live.com/" target="_blank" rel="noopener noreferrer">Открыть OneDrive ↗</a></article>
+        <article class="file-option"><div class="file-option-icon purple">⇄</div><h3>Корпоративное хранилище</h3><p>Используйте облачную папку или файловый сервис, который одобрен IT-отделом вашей организации.</p><button class="secondary-button" id="copyFileTip">Скопировать памятку</button></article>
+      </div>
+      <div class="warning-box"><strong>Не загружайте конфиденциальные рабочие файлы в личное облако без разрешения работодателя.</strong><p>Для рабочих данных используйте только одобренные организацией способы передачи.</p></div>
+    </section>
+
+    <section class="page" id="page-activity">
+      <div class="page-heading"><div class="eyebrow">ЖУРНАЛ</div><h1>История</h1><p class="lead">В этой версии история подключений не собирается.</p></div>
+      <div class="empty-state"><div class="empty-icon">◷</div><h3>Пока нет событий</h3><p>RemoteHub не получает данные о сеансах Quick Assist и не записывает активность удалённого компьютера.</p></div>
+    </section>
+
+    <section class="page" id="page-settings">
+      <div class="page-heading"><div class="eyebrow">ПАРАМЕТРЫ</div><h1>Настройки</h1><p class="lead">Персональные параметры интерфейса и подготовка к подключению.</p></div>
+      <div class="content-card"><div class="content-card-heading"><div><h3>Подготовка компьютера</h3><p>Отметьте выполненные пункты</p></div><span class="check-count" id="checkCount">0 / 4</span></div>
+        <div class="checklist">
+          <label><input type="checkbox" class="setup-check"> Домашний компьютер подключён к интернету</label>
+          <label><input type="checkbox" class="setup-check"> Рабочий компьютер включён и доступен</label>
+          <label><input type="checkbox" class="setup-check"> На обоих компьютерах доступен Quick Assist</label>
+          <label><input type="checkbox" class="setup-check"> Получено разрешение на удалённое подключение</label>
+        </div>
+      </div>
+      <div class="content-card"><div class="content-card-heading"><div><h3>Название устройства</h3><p>Название сохраняется только в текущем браузере</p></div></div><div class="rename-row"><input id="renameInput" type="text" maxlength="40" value="Рабочий ПК" aria-label="Название устройства"><button class="secondary-button" id="saveNameBtn">Сохранить</button></div></div>
+      <div class="content-card"><div class="content-card-heading"><div><h3>Безопасность</h3><p>Основные правила работы</p></div></div><ul class="security-list"><li><span>✓</span> Не сохраняйте пароли и одноразовые коды на сайте.</li><li><span>✓</span> Не передавайте код подключения посторонним.</li><li><span>✓</span> Завершайте сеанс после окончания работы.</li><li><span>!</span> Не открывайте RDP-порт напрямую в публичный интернет.</li></ul></div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog id="deviceDialog" class="modal">
+  <form method="dialog">
+    <div class="modal-top"><div><div class="eyebrow">НОВОЕ УСТРОЙСТВО</div><h2>Добавить компьютер</h2></div><button class="close-button" value="cancel" aria-label="Закрыть">×</button></div>
+    <label class="field-label" for="newDeviceName">Название компьютера</label><input id="newDeviceName" class="modal-input" type="text" maxlength="40" placeholder="Например, домашний ПК">
+    <p class="modal-hint">Сейчас название добавляется только в локальный список этого браузера. Сетевое подключение автоматически не создаётся.</p>
+    <div class="modal-actions"><button class="secondary-button" value="cancel">Отмена</button><button class="primary-button" id="confirmAddDevice" value="default">Добавить</button></div>
+  </form>
+</dialog>
+<script src="app.js"></script>
 </body>
 </html>
